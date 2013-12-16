@@ -1,7 +1,7 @@
  DROP SCHEMA spring_jdbc; 
  CREATE SCHEMA IF NOT EXISTS spring_jdbc;
  USE spring_jdbc;
- CREATE TABLE IF NOT EXISTS `User` (
+ CREATE TABLE IF NOT EXISTS `t_user` (
  `id` int auto_increment,
  `username` varchar(12) DEFAULT NULL,
  `password` varchar(12) DEFAULT NULL,
