@@ -1,6 +1,9 @@
 package biz.ezcom.spring.jdbc.dao.api;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import biz.ezcom.spring.jdbc.po.User;
 
@@ -21,7 +24,21 @@ public interface IUserDao {
     int[] modifys(List<User> users);
 
     // 查
-    int findCount();
+    Map<String, Object> findMapById(Integer id);
 
-    User find(Integer id);
+    SqlRowSet findSqlRowSetById(Integer id);
+
+    String findUsernameById(Integer id);
+
+    User findUserById(Integer id);
+
+    List<Map<String, Object>> findMaps();
+
+    List<Integer> findIdsByManagerId(Integer managerId);
+
+    List<User> findUsersByRowMapper();
+
+    List<User> findUsersByRowCallbackHandler();
+
+    List<User> findUsersByResultSetExtractor();
 }
