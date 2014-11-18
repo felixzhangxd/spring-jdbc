@@ -1,17 +1,27 @@
 package biz.ezcom.spring.jdbc.po;
 
+import java.lang.reflect.Field;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public class User {
-    private Integer id;
-    private String  name;
-    private String  password;
+    private int       id;
+    private String    name;
+    private boolean   isDeleted;
+    private Time      onlineTime;
+    private Date      birthday;
+    private Timestamp addTime;
+    private Timestamp latestTime;
 
     public User() {}
 
-    public User(Integer id, String name, String password) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.name = name;
-        this.password = password;
     }
 
     public String getName() {
@@ -22,24 +32,60 @@ public class User {
         this.name = name;
     }
 
-    public Integer getId() {
-        return this.id;
+    public Time getOnlineTime() {
+        return onlineTime;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOnlineTime(Time onlineTime) {
+        this.onlineTime = onlineTime;
     }
 
-    public String getPassword() {
-        return this.password;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Timestamp getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Timestamp addTime) {
+        this.addTime = addTime;
+    }
+
+    public Timestamp getLatestTime() {
+        return latestTime;
+    }
+
+    public void setLatestTime(Timestamp latestTime) {
+        this.latestTime = latestTime;
     }
 
     @Override
     public String toString() {
-        return this.getId() + " : " + this.getName() + " : " + this.getPassword();
+        StringBuilder s = new StringBuilder();
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            if (i != 0) {
+                s.append(", ");
+            }
+            s.append(fields[i].getName()).append("=");
+            try {
+                Object value = fields[i].get(this);
+                s.append(value);
+            } catch (Exception e) {}
+        }
+        return s.toString();
     }
 }
