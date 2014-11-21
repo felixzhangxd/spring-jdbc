@@ -83,7 +83,9 @@ public class User {
             s.append(fields[i].getName()).append("=");
             try {
                 Object value = fields[i].get(this);
-                s.append(value);
+                if(value != null) {
+                    s.append(value);
+                }
             } catch (Exception e) {}
         }
         return s.toString();
